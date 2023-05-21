@@ -22,15 +22,20 @@ Please feel free to contact me for any question or issue.
 '''
 st.info(info_text)
 
+# Se crea una variable df con pandas y se extrae la información de lo títulos en dos columnas nuevas
 df = pandas.read_csv('data.csv', sep=';')
-col3, col4 = st.columns(2)
-
+col3, empty_col, col4 = st.columns([1.5, 0.5, 1.5])  # Especificamos las medidas de las columnas. Se crea una
+                                                        # columna vacia en el centro por el espacio.
 with col3:
     for index, rows in df[:10].iterrows():
         st.header(rows['title'])
+        st.write(rows['description'])
+        st.image('images/' + rows['image'])
+        st.write(f'[Source code]({rows["url"]})')
 
 with col4:
     for index, rows in df[10:].iterrows():
         st.header(rows['title'])
-
-
+        st.write(rows['description'])
+        st.image('images/' + rows['image'])
+        st.write(f'[Source code]({rows["url"]})')
